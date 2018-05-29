@@ -37,8 +37,9 @@ def show_pics_in_subfolder(subfolder):
             root.attributes('-fullscreen', True)
             tkpi = ImageTk.PhotoImage(image1)
             label_image = Tkinter.Label(root, image=tkpi)
-            label_image.place(x=GetSystemMetrics(0)/2, y=GetSystemMetrics(1)/2, width=image1.size[0],
-                              height=image1.size[1], anchor='center')
+            label_image.place(x=GetSystemMetrics(0)/2, y=GetSystemMetrics(1)/2,
+                              width=image1.size[0], height=image1.size[1],
+                              anchor='center')
             root.title(f)
             if old_label_image is not None:
                 old_label_image.destroy()
@@ -73,7 +74,9 @@ def send_email_report(text):
     password = 'Con08Text'
     fromaddr = 'lifelogging.osu@gmail.com'
     toaddrs  = 'lifelogging.osu@gmail.com'
-    msg = 'Subject: ' + settings.subject_id + ' ' + datetime.datetime.now().strftime("%Y%m%d %H%M") + ' log report\n\n' + text
+    msg = ('Subject: ' + settings.subject_id + ' '
+           + datetime.datetime.now().strftime("%Y%m%d %H%M")
+           + ' log report\n\n' + text)
 
     # Send the mail
     server = smtplib.SMTP('smtp.gmail.com:587')
@@ -85,8 +88,8 @@ def send_email_report(text):
 
 
 
-
 #------------------------------------------
+
 if __name__ == "__main__":
 
     # Configure logging.
@@ -101,7 +104,6 @@ if __name__ == "__main__":
 
     # Routine is based on whether it is morning or evening.
     am_or_pm = 'am' if datetime.datetime.now().hour < 12 else 'pm'
-    am_or_pm = 'am'#####################################################################################################################
     logging.info(am_or_pm + ' operation')
 
     if am_or_pm == 'am':
@@ -125,8 +127,7 @@ if __name__ == "__main__":
         # Check for camera drives. If not found, prompt subject to re-insert
         # pendant until drives are found.
         drives = set(get_drives())
-        while not ('D' in drives):
-        #while not ('E' in drives and 'F' in drives):#########################################
+        while not ('E' in drives and 'F' in drives):
             show_pics_in_subfolder('/pics_error/')
             logging.warning('Camera drives not found. Prompted for retry.')
             drives = set(get_drives())
